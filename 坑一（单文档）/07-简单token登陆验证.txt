@@ -1,0 +1,21 @@
+1、login页面
+      验证登陆成功时 
+      // 存储
+      localStorage.setItem("token", 'hcm');
+2、router.beforeEach((to, from, next) => {
+  console.log(localStorage.token)
+     if(to.path=="/"){
+       next()
+     }else{
+       if(localStorage.token=='hcm1'){
+        next()
+       }else{
+         alert('请先登陆');
+         next('/');
+        
+       }
+     }
+})
+
+//删除 key
+window.localStorage.removeItem('key')

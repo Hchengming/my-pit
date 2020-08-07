@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Download</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <div class="demo">
+        <p><input type="button" id="btn" value="csv导出--谷歌,火狐"></p>
+        <p><input type="button" id="btnIE" value="csv导出--IE"></p>
+    </div>
+    <!-- <script src="json2csv.js" type="text/javascript" charset="utf-8"></script> -->
+    <script type="text/javascript" charset="utf-8">
+        // 示例数据
+        var fields = ['car', 'price', 'color'];
+        var myCars = [
+            {
+                "car": "Audi",
+                "price": 40000,
+                "color": "blue"
+            }, {
+                "car": "BMW",
+                "price": 35000,
+                "color": "black"
+            }, {
+                "car": "Porsche",
+                "price": 60000,
+                "color": "green"
+            }
+        ];
+        // json数据转csv格式
+        var csv = json2csv({ data: myCars, fields: fields });
+        document.getElementById("btn").onclick = function () {
+            let str = [];
+            let fieldsStr = fields.join(',') + "\n";
+            str.push(fieldsStr)
+            myCars.forEach(item => {
+                let temp = [];
+                fields.forEach(key => {
+                    temp.push(item[key])
+                })
+                str.push(temp.join(",") + "\n");
+            })
+            var uri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(str.join(""));
+            var downloadLink = document.createElement("a");
+            downloadLink.href = uri;
+            downloadLink.download = "export.csv";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+        document.getElementById("btnIE").onclick = function () {
+            //创建AX对象excel
+            var oXL = new ActiveXObject("Excel.Application");
+            //获取workbook对象 
+            var oWB = oXL.Workbooks.Add();
+            //激活当前sheet
+            var oSheet = oWB.ActiveSheet;
+            var Lenr = [["标题一", "标题二", "标题三"], ["4", "5", "6"], ["1", "2", "3"]];
+            for (i = 0; i < Lenr.length; i++) {
+                for (j = 0; j < Lenr[i].length; j++) {
+                    oSheet.Cells(i + 1, j + 1).value = Lenr[i][j];
+                }
+            }
+            //设置excel可见属性 
+            oXL.Visible = true;
+        }
+    </script>
+</body>
+
+</html>

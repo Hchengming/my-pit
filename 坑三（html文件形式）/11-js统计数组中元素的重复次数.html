@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var _arr = ['旅行箱', '旅行箱','大米', '小米',  '大米', '大米', '大米'];
+        var _res = []; // 
+        // _arr.sort();
+        for(var i = 0; i < _arr.length;) {
+            var count = 0;
+            for(var j = i; j < _arr.length; j++) {
+                if(_arr[i] == _arr[j]) {
+                    count++;
+                }
+            }
+            _res.push([_arr[i], count]);
+            i += count;
+        }
+        console.log(_res)
+        //_res 二维数维中保存了 值和值的重复数
+        var _newArr = [];
+        for(var i = 0; i < _res.length; i++) {
+            console.log(_res[i][0] + "重复次数:" + _res[i][1]);
+            _newArr.push(_res[i][0] + 'x' + _res[i][1]);
+        }
+    </script>
+</body>
+</html>

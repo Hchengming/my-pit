@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <script src="../jquery-1.8.3.min.js"></script>
+        <script src="./static/vue.min.js"></script>
+        <script src="./static/ag-grid-community.min.noStyle.js"></script>
+      
+        <script src="./static/ag-grid-vue.umd.js"></script>
+        <!-- <script src="./static/ag-grid-vue.common.js"></script> -->
+        <link rel="stylesheet" href="./static/ag-grid.css">
+        <link rel="stylesheet" href="./static/ag-theme-blue.css">
+    </head>
+
+    <body>
+        <h1>Hello from ag-grid!</h1>
+        <div id="app">
+            <ag-grid-vue style="width: 500px; height: 300px;" class="ag-theme-alpine" :columnDefs="columnDefs"
+                :rowData="rowData">
+            </ag-grid-vue>
+        </div>
+        <!-- <div id="myGrid" style="height: 600px;width:500px;" class="ag-theme-blue"></div>
+        <button id="btn">新增</button> -->
+
+        <script type="text/javascript" charset="utf-8">
+        Vue.component("AgGridVue",AgGridVue)
+            // import {AgGridVue} from "ag-grid-vue"
+            let app = new Vue({
+                el: "#app",
+                data: {
+                    columnDefs: [
+                    { headerName: 'Make', field: 'make' },
+                        { headerName: 'Model', field: 'model' },
+                        { headerName: 'Price', field: 'price' }
+                    ],
+                    rowData: [{ make: 'Toyota', model: 'Celica', price: 35000 },
+                        { make: 'Ford', model: 'Mondeo', price: 32000 },
+                        { make: 'Porsche', model: 'Boxter', price: 72000 }]
+                },
+
+
+                // components: {
+                //     AgGridVue
+                // }
+
+            }) 
+        </script>
+    </body>
+
+    </html>
+</body>
+
+</html>

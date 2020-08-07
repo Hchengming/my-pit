@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<style type="text/css">
+    #allmap {
+        width: 100%;
+        height: 350px;
+        overflow: hidden;
+    }
+    #result {
+        width: 100%;
+        font-size: 12px;
+    }
+</style>
+<p style="text-align: center">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+</p>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8ZHiQ5zbQ4fQsYVgwVT2aMoU"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<p style="text-align: center">
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css "/>
+</p>
+<div id="allmap"></div>
+<div id="result"></div>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map('allmap');
+    var poi = new BMap.Point(120.281813,31.911429);
+    map.centerAndZoom(poi, 16);
+    map.enableScrollWheelZoom();
+
+    var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
+            '' +
+            '地址：江阴市高巷路33号暨阳大厦1001室<br/>手机：18861630190' +
+            '</div>';
+
+    //创建检索信息窗口对象
+    var searchInfoWindow = null;
+    searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+        title: "江阴市优培教育咨询有限公司",      //标题
+        width: 260,             //宽度
+        height: 105,              //高度
+        panel: "panel",         //检索结果面板
+        enableAutoPan: true,     //自动平移
+        searchTypes: [
+            BMAPLIB_TAB_SEARCH,   //周边检索
+            BMAPLIB_TAB_TO_HERE,  //到这里去
+            BMAPLIB_TAB_FROM_HERE //从这里出发
+        ]
+    });
+    var marker = new BMap.Marker(poi); //创建marker对象
+    marker.enableDragging(); //marker可拖拽
+    searchInfoWindow.open(marker);
+    marker.addEventListener("click", function (e) {
+
+    })
+    map.addOverlay(marker); //在地图中添加marker</script>
+
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/jquery-1.11.3.js"></script>
+    <style>
+       *{
+           margin: 0;padding: 0;
+           list-style: none;
+       }
+       body{
+           max-width: 700px;
+           margin: 0 auto;
+       }
+       .scrolly_animate{
+          width: 300px;
+          height: 600px;
+          overflow: auto;
+          background: #666666;
+          /* margin-top: 100px; */
+          position: relative;
+       }
+       .scrolly_animate ul{
+           position: relative;
+           top: 10px;
+       }
+       .scrolly_animate ul li{
+           width: 100%;
+           height: auto;
+           text-align: center;
+           margin-bottom: 10px;
+       }
+       .scrolly_animate ul li img{
+           max-width: 100%;
+       }
+    </style>
+</head>
+<body>
+     <div class="scrolly_animate">
+         <ul>
+             <li><img src="images/1.jpg" alt=""></li>
+             <li><img src="images/2.jpg" alt=""></li>
+             <li><img src="images/3.jpg" alt=""></li>
+             <li><img src="images/4.jpg" alt=""></li>
+             <li><img src="images/5.jpg" alt=""></li>
+             <li><img src="images/6.jpg" alt=""></li>
+             <li><img src="images/8.jpg" alt=""></li>
+             <li><img src="images/9.jpg" alt=""></li>
+             <li><img src="images/10.jpg" alt=""></li>
+             <li><img src="images/11.jpg" alt=""></li>
+             <li><img src="images/12.jpg" alt=""></li>
+             <li><img src="images/13.jpg" alt=""></li>
+         </ul>
+     </div>  
+     <script>
+         $('.scrolly_animate').scroll(function(){
+            // var a=;
+        // console.log(a)
+        //    $('.scrolly_animate ul').offset({top:200})
+         })
+      
+     </script>
+</body>
+</html>

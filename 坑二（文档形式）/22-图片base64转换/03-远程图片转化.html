@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>将用户本地上传的资源转化，即用户通过浏览器点击文件上传时，将图片资源转化成base64</title>
+    <script src="../jquery-1.8.3.min.js"></script>
+    <style>
+        p {
+            word-break: break-all;
+            word-wrap: break-word
+        }
+    </style>
+</head>
+
+<body>
+    <h2>将网络图片资源转化为base64（感觉场景二中的资源换成绝对路径即可使用在场景三中）</h2>
+    <p></p>
+    <script>
+
+        //这是网上的一张图片链接
+        var url = "./icon.jpg";
+        getBase64(url)
+            .then(function (base64) {
+                console.log(base64);//处理成功打印在控制台
+            }, function (err) {
+                console.log(err);//打印异常信息
+            });
+
+
+        //传入图片路径，返回base64
+        function getBase64(url) {
+            function getBase64Image(image, width, height) {//width、height调用时传入具体像素值，控制大小 ,不传则默认图像大小
+                var canvas = document.createElement("canvas");
+                canvas.width = width ? width : image.width;
+                canvas.height = height ? height : image.height;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+                var dataURL = canvas.toDataURL();
+                return dataURL;
+            }
+            var image = new Image();
+            image.crossOrigin = '';
+            image.src = url;
+            var deferred = $.Deferred();
+            if (url) {
+                image.onload = function () {
+                    deferred.resolve(getBase64Image(image));//将base64传给done上传处理
+                }
+                return deferred.promise();//问题要让onload完成后再return sessionStorage['imgTest']
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+
+一、（本地打开存在跨越问题）
+ window.onload = function () {
+            var url = "./static/config.json"/*json文件url*/
+            var request = new XMLHttpRequest();
+            request.open("get", url);/*设置请求方法与路径*/
+            request.send(null);/*不发送数据到服务器*/
+            request.onload = function () {/*XHR对象获取到返回信息后执行*/
+                if (request.status == 200) {/*返回状态为200，即为数据获取成功*/
+                    var json = JSON.parse(request.responseText);
+                    document.getElementById('index_title').innerHTML=json.title
+                }
+            }
+        }
+
+
+二、直接通过script传值（jsonp）
+    <script>
+   const train=function(data){
+    document.title=data[0].title
+    
+    return  data[0].title
+ }
+
+   </script>
+    <script src="./static/config.json?callback=train"></script>
+
+
+json文件：
+   train(
+[
+    {
+        "title": "SGMW综合运维平台"
+    }
+]
+)
+

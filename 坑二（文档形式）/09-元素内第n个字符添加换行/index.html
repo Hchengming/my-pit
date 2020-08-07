@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-1.8.3.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>111111=111111</li>
+        <li>2222222=22</li>
+        <li>33333333=33</li>
+        <li>44444=44444</li>
+        <li>555555555=5555555555555555</li>
+        <li>66666666666666666</li>
+    </ul>
+    <script>
+        $('li').each(function(key, value) {
+            var txt1 = $(this).text();
+            var num = txt1.search('=');
+            if (num >= 0) {
+                var text = txt1.substring(0, num) + '<br/>' + txt1.substring(num + 1);
+                $(this).html(text)
+            }
+        })
+    </script>
+</body>
+
+</html>

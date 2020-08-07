@@ -1,0 +1,11 @@
+ var h1=window.location.href;
+ var h2=h1.lastIndexOf('id')+3;
+       var h3=h1.substr(h2,3);
+        for(var i=0;i<20;i++){
+            var p1=$('.pro_content_nav ').eq(i).find('a').attr('href');
+            var p2=p1.lastIndexOf('id')+3;
+            var p3=p1.substr(p2,3);
+           if(p3==h3){
+               $('.pro_content_nav ').eq(i).addClass('on')
+           }
+        }

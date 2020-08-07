@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>29-word、excel、pdf文档在线打开</title>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
+
+<body>
+    <!-- <iframe src='./全部.xlsx' width='100%' height='362px' frameborder='1'> -->
+    <!-- 此外还可以在iframe标签之间提供一个提示类似这样 -->
+
+    <iframe src='https://view.officeapps.live.com/op/view.aspx?src=http://storage.xuetangx.com/public_assets/xuetangx/PDF/1.xls' width='100%' height='200' frameborder='1'></iframe>
+        <!-- <a href="http://222.217.61.68:8888/pms-web/static/pdf/%E7%B3%BB%E7%BB%9F%E6%93%8D%E4%BD%9C%E6%96%87%E6%A1%A3.pdf">打开</a>
+        <img src="http://222.217.61.68:8888/pms-web/static/images/bw-logo.png" alt="">-->
+        <iframe id="srcs" src='' width='100%' height='400px' frameborder='1'>
+        </iframe> 
+    <script>
+        let url="http://222.217.61.68:8888/pms-web/static/pdf/%E7%B3%BB%E7%BB%9F%E6%93%8D%E4%BD%9C%E6%96%87%E6%A1%A3.pdf"
+        // let url="http://222.217.61.68:8888/pms-web/static/offer/全部.xlsx"
+        // let url="http://222.217.61.68:8888/pms-web/static/offer/xn--1jq3w37d9tco1vsiholap2f0ybm6bg4h1s4d9o7c.docx"
+        // let url="http://222.217.61.68:8888/pms-web/static/offer/zTree.txt"
+        let onlineViewType = ['doc', 'docx', 'xls', 'xlsx', 'xlsm', 'ppt', 'pptx']
+        let fileTypeName = url.substring(url.lastIndexOf('.') + 1, url.length).split('?')[0]
+        let isWord = onlineViewType.find((type) => type === fileTypeName)
+          let a=encodeURIComponent(url)
+       
+        // if (isWord) {
+            // console.log(123)
+            url = 'http://view.officeapps.live.com/op/view.aspx?src=' + a
+        // }
+
+        // console.log(url)
+        // console.log(url)
+        // document.getElementById('srcs').src=url
+        // window.open(url, '_blank')
+        // $ajax('')
+    </script> 
+</body>
+
+</html>

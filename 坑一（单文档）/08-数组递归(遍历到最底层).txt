@@ -1,0 +1,11 @@
+forTreeData = (data,fn,) => {
+  for(var i=0;i<data.length;i++){
+  	fn.apply(this,[data[i]]);
+  	if(data[i].childNodes.length>0){
+  		forTreeData(data[i].childNodes,fn);
+  	}
+  }
+}
+
+
+forTreeData (data,fn)//data 数组  fn:参数  

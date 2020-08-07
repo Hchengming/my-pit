@@ -1,0 +1,45 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="jquery-1.9.1.js"></script>
+</head>
+
+<body>
+    <style>
+        div {
+            margin: 3px;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 0px;
+            top: 30px;
+            background: green;
+            display: none;
+        }
+        
+        div.newcolor {
+            background: blue;
+        }
+    </style>
+
+    <div></div>
+    <script>
+        //生成大写字母  A的Unicode值为65
+        var str1 = [];
+        for (var i = 65; i < 91; i++) {
+            str1.push(String.fromCharCode(i));
+        }
+
+
+        //生成小写字母  a的Unicode值为97
+        var str2 = [];
+        for (var j = 97; j < 123; j++) {
+            str2.push(String.fromCharCode(j));
+        }
+        console.log(str2);
+    </script>
+</body>
+
+</html>

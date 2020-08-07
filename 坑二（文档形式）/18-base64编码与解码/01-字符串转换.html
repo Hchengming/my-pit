@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>base64编码与解码</title>
+    <script src="../jquery-1.8.3.min.js"></script>
+</head>
+
+<body>
+    <div style='margin: 50px auto;width: 800px;'>
+        <h2 style="color: red">原生==>base64=>原生</h2>
+        <p>原生:<span class="txt1">我是一个并</span></p>
+        <p>base64:<span class="txt2"></span></p>
+        <p>再原生：<span class="txt3"></span></p>
+    </div>
+    <script>
+
+        //  window.atob(data)   base64转码
+        // window.encodeURIComponent(data)  中文需要先URI 组件编码或对解码后的内容进行 URI 解码
+        var txt1 = $('.txt1').text()
+        var base64 = window.btoa(window.encodeURIComponent(txt1))  //原生==>base64
+        $('.txt2').text(base64)
+        // window.atob(base64);   解码
+        var txt3=window.decodeURI(atob(base64))   //中文解码
+        $('.txt3').html(txt3)
+        console.log(txt3)
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-1.8.3.min.js"></script>
+    <style>
+        ul,
+        li {
+            list-style: none;
+        }
+        
+        .container {
+            width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container li {
+            float: left;
+            margin: 10px 10px;
+        }
+        
+        .container li img {
+            /* width: 240px;
+            height: 180px; */
+        }
+        
+        p {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="container">
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg"  /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/5.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/6.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/7.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/8.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/9.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/10.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/11.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/12.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/13.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/14.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/15.jpg" /></a>
+        </li>
+        <li>
+            <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/16.jpg" /></a>
+        </li>
+    </ul>
+    <script>
+        // $(function() {
+            // $('body img').each(function() {
+            //     var src1 = $(this).attr('src')
+            //     $(this).attr('data-src', src1)
+            //     $(this).attr('src', '')
+            // })
+            var oHeight = $(window).height();
+
+            loadImg();
+
+            $(window).scroll(function() {
+                loadImg()
+
+            })
+
+            function loadImg() {
+                var scrollTop = $(window).scrollTop();
+                $('body img').each(function(index) {
+                    var offsetTop = $(this).offset().top;
+                    let height=$('body img').eq(index).height()
+                    console.log(offsetTop+height,scrollTop,oHeight + scrollTop)
+                    if (offsetTop+height > scrollTop && offsetTop < oHeight + scrollTop) {
+                        $(this).attr('src', $(this).attr('data-src'))
+                    }
+                })
+            }
+        // })
+    </script>
+</body>
+
+</html>

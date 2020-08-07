@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input id="file"  type="file" class="kyc-passin">
+    <script>
+        var file=document.getElementById('file')
+        file.onchange=(e)=>{
+           // 利用fileReader对象获取file
+       var file = e.target.files[0];
+       var filesize = file.size;
+       var filename = file.name;
+       // 2,621,440   2M
+       if (filesize > 2101440) {
+           // 图片大于2MB
+    
+       }
+       var reader = new FileReader();
+       reader.readAsDataURL(file);
+      
+       reader.onload = function (e) {
+        console.log(reader)
+           // 读取到的图片base64 数据编码 将此编码字符串传给后台即可
+           var imgcode = e.target.result;
+           console.log(reader);
+       }
+     }   
+    </script>
+</body>
+</html>

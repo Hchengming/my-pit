@@ -1,0 +1,62 @@
+
+服务端
+1、npm install express
+2、const express=require('express')
+    const app=express()
+
+//CORS跨域 注意，这个代码一定要，写在注册路由的前面。
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By",' 3.2.1')
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});
+app.get('/list',(req,res,next)=>{
+    res.json({
+        status:'0',
+        msg:'',
+        result:{
+            name:"哈哈",
+            age:100
+        }
+    })
+})
+
+app.listen(3030,function(){
+    console.log('服务器已打开')
+})
+
+
+
+客户端
+
+
+  <script>
+        $.ajax({
+            type:'get',
+            dataType: 'json',
+            url:'http://localhost:3030/list',
+            success(data){
+                console.log(data)
+            },
+            error(err){
+              document.write(err)
+            }
+        })
+    </script>  
+
+
+
+
+方法二
+
+服务端
+npm install cors --save
+
+然后在app.js文件中
+var cors = require('cors'); 
+app.use(cors()); 
+注意，这个代码一定要，写在注册路由的前面。
+

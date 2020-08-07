@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>递归遍历</title>
+</head>
+
+<body>
+    <script>
+        var arr = [
+            [11, 22, 33, [123, 223]],
+            [44, 55, 66]
+        ]
+        let arr2 = []
+        function datas(data, fn) {
+            data.forEach(item => { 
+                if (item.length > 0) {  
+                     datas(item,fn)
+                } 
+                 fn(item)
+                
+            });
+        }
+        datas(arr, (val) => {
+            arr2.push(val)
+        })
+       console.log(arr2)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-1.8.3.min.js"></script>
+</head>
+
+<body>
+    <input type="file" name="file" id="file" onchange="fileUpload()" style="display:none">
+    <input type="button" onclick="select_file()" value="上传">
+    <!-- <button class="btn">点击</button> -->
+
+    <script type="text/javascript">
+        //    # 点击button按钮触发input标签
+        function select_file() {
+            $("#file").trigger("click");
+        }
+        var file;
+
+        function fileUpload() {
+            // # 创建formdata对象
+            var formData = new FormData();
+            // # 给formData对象添加<input>标签,注意与input标签的ID一致
+            formData.append('file', $('#file')[0].files[0]);
+            file=$('#file')[0].files[0];
+            $.ajax({
+                url: 'http://localhost:8081/admin/api/v1/file/upload',//这里写你的url
+                type: 'POST',
+                data: formData,
+                contentType: false,// 当有文件要上传时，此项是必须的，否则后台无法识别文件流的起始位置
+                processData: false,// 是否序列化data属性，默认true(注意：false时type必须是post)
+                dataType: 'json',//这里是返回类型，一般是json,text等
+                clearForm: true,//提交后是否清空表单数据
+                success: function (data) {   //提交成功后自动执行的处理函数，参数data就是服务器返回的数据。
+                    aler('上传成功');
+                },
+                error: function (data, status, e) {  //提交失败自动执行的处理函数。
+                    console.error(e);
+                },
+                
+            }).done(function(res) {
+                console.log(res)
+            }).fail(function(res) {
+                console.log(res)
+            });
+            // console.log('123')
+        }
+         
+        //  验证 非必要
+         $('.btn').click(()=>{
+            var reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function (e) {
+ 
+          // 读取到的图片base64 数据编码 将此编码字符串传给后台即可
+          var imgcode = e.target.result;
+          console.log(reader);
+           } 
+         })
+      
+     
+    </script>
+</body>
+
+</html>

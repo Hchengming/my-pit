@@ -1,0 +1,29 @@
+oElement.addEventListener('touchstart', touch, { passive: false });
+oElement.addEventListener('touchmove', touch, { passive: false });
+oElement.addEventListener('touchend', touch, { passive: false });
+
+function touch(event) {
+    var event = event || window.event;
+    switch (event.type) {
+        case "touchstart":
+            var touch = event.touches[0];
+            startPosition = {
+                x: touch.pageX,
+                y: touch.pageY
+            }
+            break;
+        case "touchend":
+
+            break;
+        case "touchmove":
+
+            var touch = event.touches[0];
+            endPosition = {
+                x: touch.pageX,
+                y: touch.pageY
+            }
+            deltaX = endPosition.x - startPosition.x;
+            break;
+    }
+
+}

@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+
+<body>
+    <button id="btn4">克隆</button>
+    <ul class="ul">
+        <li>橘子</li>
+        <li>草莓</li>
+        <li>哈密瓜</li>
+        <li>苹果</li>
+        <li>葡萄</li>
+        <li>猕猴桃</li>
+    </ul>
+
+    <script>
+        var btn4Obj = document.getElementById('btn4');
+        var ulObj = document.getElementsByClassName('ul');
+        var lis = document.getElementsByTagName('li');
+
+
+        btn4Obj.onclick = function() {
+            var flag = 0;
+            lis = ulObj[0].getElementsByTagName('li');
+            len = lis.length;
+            for (var i = 0; i < len; i++) {
+                flag++;
+                if (flag > len) {
+                    return;
+                }
+                var newli = lis[i].cloneNode(true);
+                newli.childNodes[0].nodeValue += '*' + len * 2;
+                ulObj[0].appendChild(newli);
+            }
+        }
+    </script>
+</body>
+
+</html>

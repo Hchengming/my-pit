@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>包含百度页面</title>
+    <script src="./jquery-1.8.3.min.js"></script>
+    
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+
+        $("#app").load("百度地图.html")
+       
+      
+    </script>
+    <script>
+        function get_ajax_data() {
+            $.ajax({
+                url: "{:U('Api/common_list')}",//请求路径
+                dataType: 'json',//数据类型
+                type: 'get',//请求方式  默认为get
+                async: true,//是否异步
+                data: {
+                    k: $('#pro_search_cnt .txt').val(),
+                    cid: 267,
+                    limit: 50
+                },//返回后台的数据
+                success: function (data) {
+                    $('.pro_search_box .box001 .box002').remove();
+                    console.log(data)
+                    var val = $('#pro_search_cnt .txt').val();
+                    if (val == '') {
+                        alert('请输入搜索内容')
+                    } else {
+                        for (var i = 0; i < data.list.length; i++) {
+                            var content = $('.pro_search_txt').html().replace('$#$', data.list[i].title)
+                                .replace('$a$', data.list[i].keywords);
+                            $('.pro_search_box .box001 ').append(content)
+
+
+                        }
+                    }
+
+
+                },
+                error: function (msg) {
+                    console.log(msg)
+                },
+                fail: function () {
+                    console.log('请求失败')
+                }
+            });
+        }
+        function ajaxs() {
+            $.ajax({
+                url: " {:U('Api/cate')}",//请求路径
+                dataType: 'json',//数据类型
+                type: 'get',//请求方式  默认为get
+                async: true,//是否异步
+                data: {
+                    k: $('.searchs .txt01').val(),
+                    cid: 267,
+                    limit: 50
+                },//返回后台的数据
+                success: function (data) {
+                    console.log(data)
+                    var val = $('.searchs .txt01').val();
+                    if (val == '') {
+                        alert('请输入搜索内容')
+                    } else {
+                        var a = data.list[0].id;
+                        var b = "{:U('List/index',array('cid'=>281))}";
+                        var c = b.replace('281', a);
+                        window.location.href = c;
+                    }
+                },
+                error: function (msg) {
+                    console.log(msg)
+                },
+                fail: function () {
+                    console.log('请求失败')
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

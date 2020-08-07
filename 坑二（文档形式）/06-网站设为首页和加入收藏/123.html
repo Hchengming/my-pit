@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-1.8.3.min.js"></script>
+</head>
+
+<body>
+    <a id=setfavorite href="http://www.sinbong.com" title="信邦生态园">添加收藏</a>
+    <a id=sethomepage href="http://www.sinbong.com" title="信邦生态园">设为首页</a>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // 添加收藏 
+            $("#setfavorite").click(function() {
+                var ctrl = (navigator.userAgent.toLowerCase()).indexOf('mac') != -1 ? 'Command/Cmd' : 'CTRL';
+                if (document.all) {
+                    window.external.addFavorite('http://www.smesoft.cn/', '信邦软件');
+                } else if (window.sidebar) {
+                    window.sidebar.addPanel('信邦软件', 'http://www.smesoft.cn/', "");
+                } else {
+                    alert('您可以尝试通过快捷键' + ctrl + ' + D 加入到收藏夹~');
+                }
+                return false;
+            });
+            // 设为首页 
+            $("#sethomepage").click(function() {
+                var url = this.href;
+                try {
+                    this.style.behavior = "url(#default#homepage)";
+                    this.setHomePage(url);
+                } catch (e) {
+                    if (document.all) {
+                        document.body.style.behavior = "url(#default#homepage)";
+                        document.body.setHomePage(url);
+                    } else if (window.sidebar) {
+                        if (window.netscape) {
+                            try {
+                                netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+                            } catch (e) {
+                                alert("此操作被浏览器拒绝！\n请在浏览器地址栏输入“about:config”并回车\n然后将 [signed.applets.codebase_principal_support]的值设置为'true',双击即可。");
+                                return false;
+                            }
+                        }
+                        var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+                        prefs.setCharPref('browser.startup.homepage', url);
+                    } else {
+                        alert('您的浏览器不支持自动设置首页, 使用浏览器菜单或在浏览器地址栏输入“chrome://settings/browser”手动设置!');
+                        $("#sethomepage").href();
+                    }
+                }
+                return false;
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

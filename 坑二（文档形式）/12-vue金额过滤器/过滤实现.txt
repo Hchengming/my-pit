@@ -1,0 +1,14 @@
+1、import {currency} from '@/util/currency.js'  引入
+2、// 过滤器
+    filters:{
+        currency:currency
+    }
+3、  商品总价: <span class="total-price">{{totalPrice | currency('￥')}}</span>
+
+
+
+全局配置
+
+// 全局配置过滤 main.js
+import currency from '@/util/currency'
+vue.filter('currency', currency);

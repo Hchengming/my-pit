@@ -1,0 +1,109 @@
+1、vue init webpack-simple my-project   创建简介版本的webapck配置模板
+2、npm install
+3、在src目录下创建vue文件已经配置的index.js
+4、配置index.js
+     例：
+import formModel from './view/formModel'
+import detailsModel from './view/detailsModel'
+import queryModel from './view/queryModel'
+const baowei={
+    // 组件注册 install
+    install(Vue){
+        Vue.component("formModel",formModel)
+        Vue.component("queryModel",queryModel)
+        Vue.component("detailsModel",detailsModel)
+    }
+}
+export default baowei;
+
+
+5、修改 webpack.config.js ，修改完成后执行npm run build 看下是否生效
+
+webpack.config.js
+
+   // 执行环境
+const NODE_ENV = process.env.NODE_ENV;
+console.log("-----NODE_ENV===",NODE_ENV);
+
+module.exports = {
+  // 根据不同的执行环境配置不同的入口
+  entry: NODE_ENV == 'development' ? './src/main.js' : './src/myPlugin/sumFunction/index.js',
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/',
+    filename: 'sumFunction.js',
+    library: 'sumFunction', // 指定的就是你使用require时的模块名
+    libraryTarget: 'umd', // 指定输出格式
+    umdNamedDefine: true // 会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define
+  },
+
+6、修改package.json 文件
+
+// 发布开源因此需要将这个字段改为 false
+"private": false,
+
+// 这个指 import tlp_plugin_sum 的时候它会去检索的路径
+"main": "dist/sumFunction.js",    //例
+
+7、提交发布：
+
+npm login  
+
+npm publish
+
+8、 下载安装，应用：（应用不多可在模块内使用）
+
+npm install hcm_db_demo1--save
+
+//main.js中引入
+import baowei;from hcm_db_demo1
+Vue.use(baowei;);
+
+
+
+
+
+package.json
+{
+  "name": "vue-flag-list",
+  "version": "1.0.0",
+  "description": "A vue plugin for entering and selecting area code",
+  "author": "guimin",
+   // 因为组件包是公用的，所以private为false
+  "private": false,
+   // 配置main结点，如果不配置，我们在其他项目中就不用import XX from '包名'来引用了，只能以包名作为起点来指定相对的路径
+  "main": "dist/vue-flag-list.min.js", 
+  "scripts": {
+    "dev": "node build/dev-server.js",
+    "start": "node build/dev-server.js",
+    "build": "node build/build.js"
+  },
+  // 指定代码所在的仓库地址
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linmoer/vue-flag-list.git"
+  },
+  // 指定打包之后，包中存在的文件夹
+  "files": [
+    "dist",
+    "src"
+  ],
+  // 指定关键字
+  "keywords": [
+    "vue",
+    "flag",
+    "code",
+    "flag code"
+  ],
+  "license": "MIT", //开源协议
+  // 项目官网的url
+  "homepage": "https://github.com/linmoer/vue-flag-list#readme",
+  "dependencies": {
+    "vue": "^2.3.3"
+  },
+  "devDependencies": {
+    ...
+  },
+  "engines": {...},
+  "browserslist": [...]
+}

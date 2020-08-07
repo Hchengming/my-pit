@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        p{
+            width: 100%;
+            /* word-break:break-all; */
+        }
+    </style>
+</head>
+<body>
+    <input id="file"  type="file" class="kyc-passin"> 
+     <p>base64串:<span id="txt1"></span></p>
+     
+     <a id="download" href="">
+         下载下来 
+     </a>
+    <script>
+        var file=document.getElementById('file');
+        let imgcode=""
+        file.onchange=(e)=>{
+           // 利用fileReader对象获取file
+       var file = e.target.files[0];
+       var filesize = file.size;//文件大小
+       var filename = file.name; //文件名
+       console.log(filename)
+       // 2,621,440   2M
+       if (filesize > 2101440) {
+           // 图片大于2MB
+    
+       }
+      
+       var reader = new FileReader();
+       reader.readAsDataURL(file);
+       reader.onload = function (e) {
+           // 读取到的图片base64 数据编码 将此编码字符串传给后台即可
+           imgcode = e.target.result;
+        //    console.log(imgcode)
+           document.getElementById('txt1').innerText=imgcode 
+
+        //    下载模块   将base64数据编码转换为blob对象
+       
+           var blob =  new Blob([imgcode]);
+            var url=URL.createObjectURL(blob);
+            // console.log(url)
+           var downloads=document.getElementById('download');
+           downloads.href=imgcode
+           downloads.setAttribute("download",filename)
+          console.log(downloads)
+       }
+     }   
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script
+  src="http://code.jquery.com/jquery-1.12.4.js"
+  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+    <div>
+        上传文件 ： <input type="file" name = "file" id = "fileId" /> 
+        <button  type = "submit" name = "btn" value = "提交" id = "btnId" onclick="check()" /> 提交
+    </div>
+    
+    <script>
+        function check() { 
+            var objFile = document.getElementById("fileId");
+            if(objFile.value == "") {
+                alert("不能空")
+            }
+            console.log(objFile.files[0]); // 文件信息
+            var files = $('#fileId').prop('files');//获取到文件列表
+            if(files.length == 0){
+                alert('请选择文件');
+            }else{
+                var reader = new FileReader();//新建一个FileReader
+                reader.readAsText(files[0], "UTF-8");//读取文件 
+                reader.onload = function(evt){ //读取完文件之后会回来这里
+                var fileString = evt.target.result; // 读取文件内容
+                console.log(fileString)
+            　　}
+        　　}   
+    　　}
+     </script>
+</body>
+</html>

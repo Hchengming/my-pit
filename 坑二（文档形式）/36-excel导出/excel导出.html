@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-polyfill/7.8.7/polyfill.min.js"></script>
+    <script type="text/javascript">
+        function tableToExcel() {
+            exports("aaa", "tableStr")
+        };
+        function getExplorer() {
+            var explorer = window.navigator.userAgent;
+            //ie
+            if (explorer.indexOf("MSIE") >= 0) {
+                return 'ie';
+            }
+            //firefox
+            else if (explorer.indexOf("Firefox") >= 0) {
+                return 'Firefox';
+            }
+            //Chrome
+            else if (explorer.indexOf("Chrome") >= 0) {
+                return 'Chrome';
+            }
+            //Opera
+            else if (explorer.indexOf("Opera") >= 0) {
+                return 'Opera';
+            }
+            //Safari
+            else if (explorer.indexOf("Safari") >= 0) {
+                return 'Safari';
+            }
+        }
+        function exports(Sheet, id) {
+
+
+            if (getExplorer() == 'ie' || getExplorer() == undefined) {
+                // console.log(123)
+                try {
+                    var curTbl = document.getElementById(id);
+                    var oXL;
+                    try {
+                        oXL = new ActiveXObject("Excel.Application"); //创建AX对象excel
+                    } catch (e) {
+                        alert("无法启动Excel!\n\n如果您确信您的电脑中已经安装了Excel，" + "那么请调整IE的安全级别。\n\n具体操作：\n\n" + "工具 → Internet选项 → 安全 → 自定义级别 → 对未标记为可安全执行脚本的ActiveX初始化并脚本运行 → 启用");
+                        return false;
+                    }
+                    var oWB = oXL.Workbooks.Add(); //获取workbook对象
+                    var oSheet = oWB.ActiveSheet;//激活当前sheet
+                    var sel = document.body.createTextRange();
+                    sel.moveToElementText(curTbl); //把表格中的内容移到TextRange中
+                    try {
+                        sel.select(); //全选TextRange中内容
+                    } catch (e1) {
+                        e1.description
+                    }
+                    sel.execCommand("Copy");//复制TextRange中内容
+                    oSheet.Paste();//粘贴到活动的EXCEL中
+                    oXL.Visible = true; //设置excel可见属性
+                    var fname = oXL.Application.GetSaveAsFilename(Sheet + ".xls", "Excel Spreadsheets (*.xls), *.xls");
+                    oWB.SaveAs(fname);
+                    oWB.Close();
+                    oXL.Quit();
+
+                } catch (e) {
+                    alert(e.description);
+                }
+            } else {
+                let tableStr = document.getElementById(id).innerHTML;
+                //Worksheet名
+                var worksheet = Sheet
+                // 真正要导出（下载）的HTML模板
+                var exportTemplate = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" '
+                    + 'xmlns="http://www.w3.org/TR/REC-html40">'
+                    + ' <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>'
+                    + worksheet +
+                    '</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>'
+                    + '  </x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--> </head> <body>'
+                    + '<table syle="table-layout: fixed;word-wrap: break-word; word-break: break-all;">'
+                    + tableStr +
+                    '</table></body></html>'
+                    ;
+                var uri = 'data:application/vnd.ms-excel;base64,';
+                //下载模板
+                window.location.href = uri + base64(exportTemplate)
+            }
+        }
+
+        //输出base64编码
+        function base64(s) {
+            return window.btoa(unescape(encodeURIComponent(s)))
+        };
+    </script>
+</head>
+
+<body>
+    <table border id="tableStr">
+        <tr style="text-align: center;">
+            <th rowspan="2">姓名</th>
+            <th colspan="2">一月</th>
+            <th colspan="2">二月</th>
+        </tr>
+        <tr style="text-align: center;">
+            <th>收入</th>
+            <th>支出</th>
+            <th>收入</th>
+            <th>支出</th>
+        </tr>
+        <tr style="text-align: center;">
+            <td>张三</td>
+            <td>10元</td>
+            <td>20元</td>
+            <td>15元</td>
+            <td>25元</td>
+        </tr>
+        <tr style="text-align: center;">
+            <td>李四</td>
+            <td>100元</td>
+            <td>200元</td>
+            <td>150元</td>
+            <td>250元</td>
+        </tr>
+        <table>
+            <button id="export" onclick="tableToExcel()">导出excel</button>
+
+</body>
+
+</html>

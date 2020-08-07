@@ -1,0 +1,47 @@
+PC端：
+ajax获取路径：http://192.168.40.81:4032/index.php/Api/common_list/cid/267
+手机端：
+ajax获取路径：http://192.168.40.81:4032/index.php?s=/Mobile/Api/common_list/cid/267
+
+
+http://192.168.40.81:4032/index.php/Api/common_list/cid/267/k/22    获取产品数22个
+
+
+写活：ajax获取路径{:U('Api/common_list')}
+
+$.ajax({
+            url: "{:U('Api/common_list')}",//请求路径
+            dataType: 'json',//数据类型
+            type: 'get',//请求方式  默认为get
+            async: true,//是否异步
+            data: {
+                k: $('#pro_search_cnt .txt').val(),
+                cid: 267,
+				limit:50
+            },//返回后台的数据
+            success: function (data) {
+                $('.pro_search_box .box001 .box002').remove();
+                console.log(data)
+                   var val=$('#pro_search_cnt .txt').val();
+                   if(val==''){
+                       alert('请输入搜索内容')
+                   }else{
+                       for (var i = 0; i < data.list.length; i++) {
+
+                           var content = $('.pro_search_txt').html().replace('$#$', data.list[i].title)
+                                   .replace('$a$', data.list[i].keywords);
+                           $('.pro_search_box .box001 ').append(content)
+
+
+                       }
+                   }
+
+
+            },
+            error: function (msg) {
+                console.log(msg)
+            },
+            fail: function () {
+                console.log('请求失败')
+            }
+        });

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sort排序</title>
+</head>
+
+<body>
+    <script>
+        let arr = [
+            {
+                "name": "张三",
+                "class": "高三(1)班",
+                "age": 17,
+                "height": 163,
+                "weight": 50,
+                "id": "001",
+                "status": "1"
+            },
+            {
+                "name": "李四",
+                "class": "高三(2)班",
+                "age": 18,
+                "height": 153,
+                "weight": 60,
+                "id": "002",
+                "status": "1"
+            },
+            {
+                "name": "王五",
+                "class": "高三(1)班",
+                "age": 17,
+                "height": 150,
+                "weight": 65,
+                "id": "003",
+                "status": "0"
+            }, {
+                "name": "",
+                "class": "高三(1)班",
+                "age": 17,
+                "height": 163,
+                "weight": 50,
+                "id": "001",
+                "status": "1"
+            },
+            {
+                "name": "李四",
+                "class": "高三(2)班",
+                "age": 18,
+                "height": 153,
+                "weight": 60,
+                "id": "002",
+                "status": "1"
+            }, {
+                "name": "王五",
+                "class": "高三(1)班",
+                "age": 17,
+                "height": 150,
+                "weight": 65,
+                "id": "003",
+                "status": "0"
+            }
+        ]
+        arr.sort((a, b) => {
+            if (a.name >b.name) {
+                return 1
+            } else if (a.name < b.name) {
+                return -1
+            } else {
+                return 0
+            }
+            // return a.name - b.name
+        })
+        console.log(arr)
+    </script>
+</body>
+
+</html>

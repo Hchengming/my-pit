@@ -1,0 +1,71 @@
+  //下载模板-基于base64
+    downloadFile() {
+      _this.isLoad = true;
+      clientAjaxReq(
+        "/file/downloadFileBase64",
+        {
+          fileName: "UCU-template.xlsx"
+        },
+        function(state, rspMsg, rspData) {
+          if (state == "FAIL") {
+            _this.$Message.error("下载失败！");
+            _this.isLoad = false;
+            return;
+          }
+          if (state == "ERROR") {
+            _this.$Message.error(rspMsg);
+            _this.isLoad = false;
+            return;
+          }
+          if (state == "SUCCESS") {
+            console.log(rspData);
+            let btn = document.createElement("a");
+            let fileName = rspData.fileName;
+            let code = `data:text/html;base64,${rspData.content}`;
+            btn.setAttribute("download", fileName);
+            btn.setAttribute("href", code);
+            btn.click();
+            _this.isLoad = false;
+          }
+        }
+      );
+    },
+    //下载模板-流
+    downloadFileL() {
+      axios
+        .post(
+          "http://172.22.1.8/zhyw/api/v1/file/downloadByFileName",
+          {
+            appId: "appId",
+            signType: "signType",
+            sign: "sign",
+            reqTime: new Date().getTime(),
+            method: "method",
+            reqData: {
+              fileName: "UCU-template.xlsx"
+            }
+          },
+          {
+            responseType: "blob",
+            headers: {
+              "H-User-Token": sessionStorage.getItem("userToken")
+            }
+          }
+        )
+        .then(res => {
+            console.log(res)
+            const link = document.createElement("a");
+            let blob = new Blob([res.data], {
+              type: "application/vnd.ms-excel"
+            });
+            link.style.display = "none";
+            link.href = URL.createObjectURL(blob);
+            let num = "";
+            for (let i = 0; i < 10; i++) {
+              num += Math.ceil(Math.random() * 10);
+            }
+            link.setAttribute("download", "用户_" + num + ".xlsx");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });

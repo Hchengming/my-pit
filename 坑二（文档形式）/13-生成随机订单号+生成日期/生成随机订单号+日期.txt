@@ -1,0 +1,12 @@
+    // 加载日期工具类
+require("./../util/util")
+
+
+ var platform = "622" //平台号
+ let r1 = Math.floor(Math.random() * 10); //生成0~10随机数
+ let r2 = Math.floor(Math.random() * 10);
+ let sysDate = new Date().Format('yyyyMMddhhmmss');
+            // 订单日期
+            let createDate = new Date().Format('yyyy-MM-dd hh:mm:ss');
+            // 生成订单Id
+            let orderId = platform + r1 + sysDate + r2

@@ -1,0 +1,39 @@
+1、封装文件  common.js
+   
+// 表格自定义排序
+const tableSort=function(column,tableData){
+   console.log(123)
+}
+
+
+
+const MyPlugin = {}
+MyPlugin.install = function (Vue, options) {
+  // 4. 添加实例方法
+  Vue.prototype.$tableSort = tableSort
+}
+export default MyPlugin
+
+
+2、打包注册配置文件 index.js
+import MyPlugin from './view/js/common'
+const baowei={
+    // 组件注册 install
+    install(Vue){
+        /*公用js插件*/
+        Vue.use(MyPlugin);
+    }
+}
+export default baowei;
+ 
+
+
+3、使用
+
+method:{
+ change(column) {
+      // 打包后
+      this.$tableSort()
+    },
+}
+ 

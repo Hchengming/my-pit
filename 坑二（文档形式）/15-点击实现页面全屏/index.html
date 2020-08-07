@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>全屏不全屏</title>
+</head>
+
+<body>
+    <input id="fullScreen" type="button" onclick="handleFullscreen()" value="全屏" />
+</body>
+
+</html>
+<script>
+  let value=false;
+   function  handleFullscreen () {
+      let main = document.body
+
+      if (value) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen()
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen()
+        } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen(()=>{return value=true})
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen()
+        }
+      } else {
+        if (main.requestFullscreen) {
+          main.requestFullscreen()
+        } else if (main.mozRequestFullScreen) {
+          main.mozRequestFullScreen()
+        } else if (main.webkitRequestFullScreen) {
+          main.webkitRequestFullScreen()
+        } else if (main.msRequestFullscreen) {
+          main.msRequestFullscreen()
+        }
+      }
+     
+    }
+   document.onkeydown = (event) => { //监听整个键盘的onkeydown事件
+      if ( event.keyCode == 122) {
+        event.preventDefault(); //阻止浏览器的默认行为
+        handleFullscreen(); //调用H5的api
+      }
+    };
+    let isFullscreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen
+    isFullscreen = !!isFullscreen
+    document.addEventListener('fullscreenchange', () => {
+        value=!value
+        document.getElementById('fullScreen').value=value?'退出':'全屏'
+    })
+    document.addEventListener('mozfullscreenchange', () => {
+        value=!value
+        document.getElementById('fullScreen').value=value?'退出':'全屏'
+    })
+    document.addEventListener('webkitfullscreenchange', () => {
+        value=!value
+        document.getElementById('fullScreen').value=value?'退出':'全屏'
+    })
+    document.addEventListener('msfullscreenchange', () => {
+        value=!value
+        document.getElementById('fullScreen').value=value?'退出':'全屏'
+    })
+
+</script>

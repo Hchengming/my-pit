@@ -1,0 +1,12 @@
+var fd = new FormData()
+fd.append('file', files[0])
+let config = {
+    headers: {
+        'Content-Type': 'multipart/form-data'
+    }
+}
+axios.post(that.uploadUrl, fd,config).then( res => {
+    console.log(res)
+}).catch( res => {
+    console.log(res)
+})

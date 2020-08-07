@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<p id="pp"></p>
+
+<body>
+    <script>
+        let _beforeUnload_time=null,_gap_time=null;
+        // 在即将离开当前页面
+        window.addEventListener('beforeunload', e => beforeunloadHandler(e));
+        //页面卸载事件
+        window.addEventListener('unload', e => unloadHandler(e));
+        let beforeunloadHandler = function () {
+            _beforeUnload_time = new Date().getTime();
+        }
+        let unloadHandler = function (e) {
+            _gap_time = new Date().getTime() - _beforeUnload_time;
+            //   debugger
+            //判断是窗口关闭还是刷新
+            if (_gap_time <= 5) {
+                console.log("关闭")
+
+                let num = localStorage.getItem("guanbi");
+                if (!num) {
+                    num = 0;
+                } else {
+                    num = parseFloat(num);
+                    num++
+                }
+                localStorage.setItem("guanbi", num)
+                //如果是登录状态，关闭窗口前，移除用户
+                // if(!this.showLoginButton){
+                //   $.ajax({
+                //     url: '/pictureweb/user/remove',
+                //     type: 'get',
+                //     async:false, //或false,是否异步
+
+                //   })
+                // }
+            } else {
+                console.log("刷新")
+                let num = localStorage.getItem("shuaxin");
+                if (!num) {
+                    num = 0;
+                } else {
+                    num = parseFloat(num);
+                    num++
+                }
+                localStorage.setItem("shuaxin", num)
+            }
+        }
+    </script>
+</body>
+
+</html>

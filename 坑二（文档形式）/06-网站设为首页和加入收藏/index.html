@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 设为首页 -->
+    <li>
+        <a href="javascript:setHome(this,window.location)">
+            <span class="glyphicon glyphicon-home"></span> <b>设为首页</b></a>
+    </li>
+    <!-- 加入收藏 -->
+    <li>
+        <a href="javascript:addFavorite()">
+            <span class="glyphicon glyphicon-heart"></span> <b>加入收藏</b></a>
+    </li>
+
+
+    <script type="text/javascript">
+        function addFavorite() {
+            var url = window.location;
+            var title = document.title;
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.indexOf("msie 8") > -1) {
+                external.AddToFavoritesBar(url, title, ''); //IE8
+            } else {
+                try {
+                    window.external.addFavorite(url, title);
+                } catch (e) {
+                    try {
+                        window.sidebar.addPanel(title, url, ""); //firefox
+                    } catch (e) {
+                        alert("加入收藏失败，请使用Ctrl+D进行添加");
+                    }
+                }
+            }
+        }
+
+
+        //设为首页 <a onclick="setHome(this,window.location)">设为首页</a>
+        function setHome(obj, vrl) {
+            try {
+                obj.style.behavior = 'url(#default#homepage)';
+                obj.setHomePage(vrl);
+                alert(123)
+            } catch (e) {
+                if (window.netscape) {
+                    try {
+                        netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+                    } catch (e) {
+                        alert("此操作被浏览器拒绝！\n请在浏览器地址栏输入“about:config”并回车\n然后将 [signed.applets.codebase_principal_support]的值设置为'true',双击即可。");
+                    }
+                    var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
+                    prefs.setCharPref('browser.startup.homepage', vrl);
+                }
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
