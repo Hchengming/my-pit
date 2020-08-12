@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片上传功能</title>
+    <script src="../../../jquery-1.8.3.min.js"></script>
+</head>
+
+<body>
+    <button onclick="btn()">图片上传</button>
+    <script>
+        const btn = function () {
+            console.log(1)
+            $("body").append(`<input id="ipt-file" style="display:none" type="file">`)
+            $("#ipt-file").click()
+            $("#ipt-file").change((e) => {
+                var formData = new FormData();
+                let file = e.target.files[0];
+                formData.append("file", file);
+                $.ajax({
+                    type: 'POST',
+                    url: "http://192.168.3.178:4002/upload/single",
+                    processData: false,// ⑧告诉jQuery不要去处理发送的数据
+                    contentType: false, // ⑨告诉jQuery不要去设置Content-Type请求头
+                    data: formData,
+                    success: (data) => {
+                        console.log(data)
+                        $("#ipt-file").remove()
+                    },
+                    error(msg){
+                        console.log(msg)
+                    }
+                });
+            })
+        }
+
+    </script>
+</body>
+
+</html>
